@@ -23,15 +23,15 @@ public class ProductController {
     }
     //Get All Product
     @GetMapping("/getall")
-    public List<Product> getAllProduct(){
+    public ResponseEntity<List<Product>> getAllProduct(){
         List<Product> allProduct=productService.getAllProduct();
-        return  allProduct;
+        return  new ResponseEntity<List<Product>>(allProduct,HttpStatus.ACCEPTED);
     }
     // Get Product By Product Id
     @GetMapping("/getbyid/{product_id}")
-    public Product getById(@PathVariable int product_id  ){
+    public ResponseEntity<Product> getById(@PathVariable int product_id  ){
         Product resById=productService.getById(product_id);
-        return resById;
+        return new ResponseEntity<Product>(resById,HttpStatus.ACCEPTED);
     }
 
     //Update Product
@@ -49,9 +49,6 @@ public class ProductController {
         System.out.println("Product Deleted");
 
     }
-
-
-
 
 
 }
