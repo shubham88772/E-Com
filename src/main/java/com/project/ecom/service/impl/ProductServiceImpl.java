@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
@@ -17,11 +16,12 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public Product addProduct(ProductDto product){
+    public ProductDto addProduct(ProductDto product){
         //Product DTO to Product
         Product entity=toEntity(product);
         Product addedPro=productRepository.save(entity);
-        return addedPro;
+        ProductDto converted=toDto(addedPro);
+        return converted;
     }
 
     @Override
@@ -65,7 +65,20 @@ public class ProductServiceImpl implements ProductService {
         p.setStock(productDto.isStock());
         p.setLive(productDto.isLive());
         p.setProduct_id(productDto.getProduct_id());
+        p.setProduct_imageName(productDto.getProduct_imageName());
         return p;
+    }
+    public ProductDto toDto(Product product){
+        ProductDto productDto=new ProductDto();
+        productDto.setProduct_id(product.getProduct_id());
+        productDto.setProduct_desc(productDto.getProduct_desc());
+        productDto.setProduct_name(productDto.getProduct_name());
+        productDto.setProduct_imageName(product.getProduct_imageName());
+        productDto.setProduct_price(productDto.getProduct_price());
+        productDto.setLive(productDto.isLive());
+        productDto.setStock(product.isStock());
+        return productDto;
+
     }
 
 

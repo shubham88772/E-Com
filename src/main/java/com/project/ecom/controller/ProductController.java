@@ -18,9 +18,9 @@ public class ProductController {
 
     //Add New Product
     @PostMapping("/add")
-    public ResponseEntity<Product> addProduct(@RequestBody ProductDto product){
-         Product addedProduct=productService.addProduct(product);
-         return new ResponseEntity<Product>(addedProduct,HttpStatus.CREATED);
+    public ResponseEntity<ProductDto> addProduct(@RequestBody ProductDto product){
+         ProductDto addedProduct=productService.addProduct(product);
+         return new ResponseEntity<ProductDto>(addedProduct,HttpStatus.CREATED);
     }
     //Get All Product
     @GetMapping("/getall")
