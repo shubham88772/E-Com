@@ -1,12 +1,13 @@
 package com.project.ecom.service;
 
 import com.project.ecom.model.Product;
+import com.project.ecom.payload.ProductDto;
 
 import java.util.List;
 
 public interface ProductService {
 
-    public Product addProduct(Product product);
+    public Product addProduct(ProductDto product);
 
     List<Product> getAllProduct();
 

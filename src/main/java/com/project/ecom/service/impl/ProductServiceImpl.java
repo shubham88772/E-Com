@@ -2,6 +2,7 @@ package com.project.ecom.service.impl;
 
 import com.project.ecom.Exception.ResourceNotFoundException;
 import com.project.ecom.model.Product;
+import com.project.ecom.payload.ProductDto;
 import com.project.ecom.repository.ProductRepository;
 import com.project.ecom.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,10 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public Product addProduct(Product product){
-        Product addedPro=productRepository.save(product);
+    public Product addProduct(ProductDto product){
+        //Product DTO to Product
+        Product entity=toEntity(product);
+        Product addedPro=productRepository.save(entity);
         return addedPro;
     }
 
@@ -52,6 +55,17 @@ public class ProductServiceImpl implements ProductService {
         Product savedProduct=productRepository.save(oldProduct);
 
         return savedProduct;
+    }
+    public Product toEntity(ProductDto productDto){
+        Product p=new Product();
+        p.setProduct_name(productDto.getProduct_name());
+        p.setProduct_price(productDto.getProduct_price());
+        p.setProduct_desc(productDto.getProduct_desc());
+        p.setProduct_quantity(productDto.getProduct_quantity());
+        p.setStock(productDto.isStock());
+        p.setLive(productDto.isLive());
+        p.setProduct_id(productDto.getProduct_id());
+        return p;
     }
 
 
